@@ -12,11 +12,11 @@ unsigned int skybox[6];
 void initskybox()
 {
         skybox[SKY_LEFT]=loadTexture("data/2k_stars_milky_way.jpg");
-        skybox[SKY_BACK]=loadTexture("data/gra1.png");
-        skybox[SKY_RIGHT]=loadTexture("data/gra2.png");
-        skybox[SKY_FRONT]=loadTexture("data/gra2.png");
-        skybox[SKY_TOP]=loadTexture("data/gra2.png");
-        skybox[SKY_BOTTOM]=loadTexture("data/gra1.png");
+        skybox[SKY_BACK]=loadTexture("data/2k_stars_milky_way.jpg");
+        skybox[SKY_RIGHT]=loadTexture("data/2k_stars_milky_way.jpg");
+        skybox[SKY_FRONT]=loadTexture("data/2k_stars_milky_way.jpg");
+        skybox[SKY_TOP]=loadTexture("data/2k_stars_milky_way.jpg");
+        skybox[SKY_BOTTOM]=loadTexture("data/2k_stars_milky_way.jpg");
 }
 
 void killskybox()
@@ -221,16 +221,15 @@ void drawCube(float size)
 }
 
 unsigned int loadTexture(const char* filename)  
-{
- unsigned int num;       
-        glGenTextures(1,&num); 	
+{	
+ 	unsigned int num;       
+	IMG_Init(IMG_INIT_JPG);
 	SDL_Surface* img=IMG_Load(filename); 
-        glBindTexture(GL_TEXTURE_2D,num);       
+	glGenTextures(1,&num);        
+	glBindTexture(GL_TEXTURE_2D,num);       
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR); 
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR); 
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);      
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);     
-        glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,img->w,img->h,0,GL_RGB,GL_UNSIGNED_SHORT_5_6_5,img->pixels);        
+        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);  
+    	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 0, GL_RGB, GL_UNSIGNED_BYTE, img->pixels);       
         SDL_FreeSurface(img);   
         return num;     
 }

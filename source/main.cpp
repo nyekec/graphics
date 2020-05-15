@@ -18,7 +18,7 @@ void init()
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_DEPTH_TEST);
 
-	planet_textureID=obj.loadTexture("data/sun.jpg");
+	planet_textureID=obj.loadTexture("data/moon.jpg");
         cube=obj.load("data/jupiter.obj",planet_textureID);
 	
         glEnable(GL_LIGHTING);
@@ -34,6 +34,9 @@ void display(float _angle, float _light, bool _mousein)
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         glLightfv(GL_LIGHT0,GL_POSITION,pos); 
 	GLfloat ambient[] = { _light, _light, _light, 1.0f };
+	GLfloat diffuse[] = {2.0, 0.0, 0.0, 1.0};
+	GLfloat specular[] = {3.0, 1.0, 1.0, 1.0};
+	GLfloat shininess[] = {20.0};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	drawSkybox(50.0);
